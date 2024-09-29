@@ -1,0 +1,42 @@
+pip install tensorflow
+
+#import required libraries 
+import numpy as np
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers
+
+#Generate Dataset - Generate a dataset of Inches and centimeters values
+inches = np.linspace(0,200,500)
+centimeters = inches * 2.54
+
+# Reshape data to fit the model
+inches = inches.reshape(-1, 1)
+centimeters = centimeters.reshape(-1, 1)
+
+#Define the Neural Network
+model = keras.Sequential([
+    layers.Dense(units=1, input_shape=[1])
+])
+
+#Determining the intial weights of the model
+initial_weights = model.get_weights()
+print("Initial Weights:", initial_weights)
+
+#Compile the model with a learning rate
+model.compile(optimizer=keras.optimizers.SGD(learning_rate=1e-3, clipvalue=1.0), loss='mean_squared_error')
+
+#Train the Neural Network
+history = model.fit(inches, centimeters, epochs=500, batch_size=10, verbose=1)
+
+#Test the Neural Network
+test_inches = np.array([1, 5, 100, 200], dtype=np.float32).reshape(-1, 1)
+test_centimeters = model.predict(test_inches)
+
+#Print the results
+for i in range(len(test_inches)):
+    print(f"{test_inches[i]} inches is approximately {test_centimeters[i][0]} centimeters")
+
+#Summary of the model 
+print("Model Summary:")
+model.summary()
