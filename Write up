@@ -1,0 +1,7 @@
+Experiments and results:
+I choose the formula for converting inches to centimeters. I generated 500 points of data ranging from 0 to 200 inches, The neural network architecture consists of a  single neuron with one input and one output. I trained the model using a stochastic gradient descent (SGD) optimizer for 500 epochs with a batch size of 10. The model successfully learned the relationship between inches and centimeters.
+
+
+
+Challenges: 
+One challenge I faced was ensuring the model was trained properly without underfitting or overfitting. Adjusting the number of epochs and batch size achieves a better fit.
